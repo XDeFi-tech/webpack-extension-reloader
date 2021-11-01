@@ -1,15 +1,12 @@
 {
-  "name": "webpack-extension-reloader",
+  "name": "@xdefi-tech/webpack-extension-reloader",
   "version": "1.1.4",
   "private": false,
   "description": "Watch for changes and force the reload of the browser extension",
   "main": "dist/webpack-extension-reloader.js",
   "bin": "./dist/webpack-extension-reloader-cli.js",
   "types": "typings/webpack-extension-reloader.d.ts",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/rubenspgcavalcante/webpack-extension-reloader.git"
-  },
+  "repository": "https://github.com/XDeFi-tech/webpack-extension-reloader.git",
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
@@ -57,7 +54,7 @@
     "minimist": "^1.2.0",
     "useragent": "^2.3.0",
     "webextension-polyfill": "^0.5.0",
-    "webpack-sources": "^1.4.3",
+    "webpack-sources": "3.2.1",
     "ws": "^7.2.0"
   },
   "peerDependencies": {

@@ -1,0 +1,47 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Create a tag
+
+# Controls when the workflow will run
+on: 
+  # Triggers the workflow on push or pull request events but only for the master branch
+#   push:
+#     branches: [ develop ]
+  workflow_dispatch:
+     inputs:
+      tags:
+        description: 'Enter Tag no'
+        required: true
+        default: ''
+   
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  createTag:
+    name: "Create Tag & release"
+    runs-on: "ubuntu-latest"
+
+    steps:
+      # ...
+      - name: Create tag
+        uses: actions/github-script@v3
+        with:
+          github-token: ${{ github.token }}
+          script: |
+            console.log(context)
+            github.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: "refs/tags/${{ github.event.inputs.tags }}",
+              sha: context.sha
+            })
+      - name: Create a release
+        uses: actions/github-script@v3
+        with:
+          github-token: ${{ secrets.PAT }}
+          script: |
+            console.log(context)
+            github.repos.createRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              tag_name: "${{ github.event.inputs.tags }}"
+            })
